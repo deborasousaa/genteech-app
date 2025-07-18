@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Treinamento</title>
+    <style>
+        /* --- Estilos Gerais (Consistentes) --- */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Estilos do Cabeçalho --- */
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #004080;
+            padding-bottom: 15px;
+        }
+        .form-header h1 {
+            margin: 0;
+            font-size: 26px;
+            color: #004080;
+        }
+        .form-header p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* --- Estilos do Formulário --- */
+        h2 {
+            color: #004080;
+            font-size: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 98%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .form-group-checkbox label {
+            font-weight: normal;
+        }
+        .approval-section {
+            margin-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 20px;
+        }
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 40px;
+            width: 250px;
+            display: block;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ========= CABEÇALHO ========= -->
+        <div class="form-header">
+            <h1>FORMULÁRIO DE SOLICITAÇÃO DE TREINAMENTO</h1>
+            <p>SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.</p>
+            <p>Protocolo: ST-[AAAA]-[NÚMERO] | Status: [Pendente]</p>
+        </div>
+
+        <!-- ========= CORPO DO FORMULÁRIO ========= -->
+        <form>
+            <div class="form-section">
+                <h2>1. DADOS DO SOLICITANTE</h2>
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="[Nome completo]">
+                </div>
+                <div class="form-group">
+                    <label for="cargo">Cargo:</label>
+                    <input type="text" id="cargo" name="cargo" value="[Cargo atual]">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>2. DADOS DO TREINAMENTO SOLICITADO</h2>
+                <div class="form-group">
+                    <label for="treinamento">Nome do Treinamento:</label>
+                    <input type="text" id="treinamento" name="treinamento" value="[Nome completo]">
+                </div>
+                <div class="form-group">
+                    <label for="justificativa">Justificativa e Benefícios para a Empresa:</label>
+                    <textarea id="justificativa" name="justificativa">[Descrever detalhadamente a necessidade...]</textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>3. INFORMAÇÕES FINANCEIRAS</h2>
+                <div class="form-group">
+                    <label for="custo">Custo Total Estimado:</label>
+                    <input type="text" id="custo" name="custo" value="R$ [Valor]">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>4. COMPROMISSOS DO SOLICITANTE</h2>
+                <div class="form-group-checkbox">
+                    <input type="checkbox" id="comp1" name="comp1" checked>
+                    <label for="comp1">Participar integralmente do treinamento</label>
+                </div>
+                <div class="form-group-checkbox">
+                    <input type="checkbox" id="comp2" name="comp2" checked>
+                    <label for="comp2">Compartilhar conhecimentos com a equipe</label>
+                </div>
+            </div>
+
+            <div class="approval-section">
+                <h2>5. APROVAÇÕES</h2>
+                <div class="form-group">
+                    <label>Parecer do Gestor Direto:</label>
+                    <textarea>[Comentários do gestor...]</textarea>
+                    <span class="signature-line"></span>
+                    <label>Assinatura do Gestor</label>
+                </div>
+                <div class="form-group">
+                    <label>Parecer do RH:</label>
+                    <textarea>[Comentários do RH...]</textarea>
+                    <span class="signature-line"></span>
+                    <label>Assinatura do RH</label>
+                </div>
+            </div>
+        </form>
+
+    </div> <!-- Fim do container -->
+
+</body>
+</html>

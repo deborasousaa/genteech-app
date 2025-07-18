@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Treinamento - [NOME DO TREINAMENTO]</title>
+    <style>
+        /* --- Estilos Gerais (Consistentes) --- */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Estilos do Cabeçalho (Reutilizado) --- */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .header-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .header-table .title-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #f2f2f2;
+        }
+
+        /* --- Estilos do Corpo do Documento --- */
+        h1, h2, h3 {
+            color: #004080;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 16px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        ul {
+            padding-left: 20px;
+            list-style-type: none; /* Remove as bolinhas padrão */
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        .check-mark::before {
+            content: '✅ '; /* Adiciona um checkmark antes do item */
+            color: green;
+        }
+
+        /* --- Estilos das Tabelas de Dados --- */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+        .data-table td.text-left {
+            text-align: left;
+        }
+        .summary-box {
+            background-color: #eaf2fa;
+            border: 1px solid #b3d7ff;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ========= CABEÇALHO ========= -->
+        <table class="header-table">
+            <tr><td class="title-cell">RELATÓRIO DE TREINAMENTO</td></tr>
+            <tr><td><strong>Treinamento:</strong> [NOME DO TREINAMENTO]</td></tr>
+            <tr><td><strong>Data:</strong> [DD/MM/AAAA] | <strong>Instrutor:</strong> [NOME]</td></tr>
+            <tr><td><strong>Relatório elaborado por:</strong> [NOME]</td></tr>
+        </table>
+
+        <!-- ========= CORPO DO DOCUMENTO ========= -->
+        <h1>RELATÓRIO DE TREINAMENTO<br>[NOME DO TREINAMENTO]</h1>
+
+        <h2>1. DADOS GERAIS</h2>
+        <p>
+            <strong>Data/Período:</strong> [DD/MM/AAAA a DD/MM/AAAA]<br>
+            <strong>Carga Horária:</strong> [XX] horas<br>
+            <strong>Local:</strong> [Descrição do local]<br>
+            <strong>Instrutor(es):</strong> [Nome(s)]
+        </p>
+
+        <h2>2. PARTICIPANTES</h2>
+        <div class="summary-box">
+            <strong>Resumo Quantitativo:</strong><br>
+            Inscritos: [XX] | Presentes: [XX] | Ausentes: [XX] | Taxa de participação: [XX]%
+        </div>
+        
+        <h3>2.2 Lista de Participantes</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Área</th>
+                    <th>Presença</th>
+                    <th>Avaliação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-left">[Nome do Funcionário 1]</td>
+                    <td>[Cargo]</td>
+                    <td>[Área]</td>
+                    <td>✅</td>
+                    <td>[Nota]</td>
+                </tr>
+                <tr>
+                    <td class="text-left">[Nome do Funcionário 2]</td>
+                    <td>[Cargo]</td>
+                    <td>[Área]</td>
+                    <td>❌</td>
+                    <td>N/A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. CONTEÚDO MINISTRADO</h2>
+        <ul>
+            <li class="check-mark">[Módulo 1]: [Descrição] - [Duração]</li>
+            <li class="check-mark">[Módulo 2]: [Descrição] - [Duração]</li>
+            <li class="check-mark">[Módulo 3]: [Descrição] - [Duração]</li>
+        </ul>
+
+        <h2>4. AVALIAÇÃO DOS PARTICIPANTES</h2>
+        <h3>4.1 Resultados das Avaliações</h3>
+        <div class="summary-box">
+            Média geral: <strong>[XX]</strong> | Taxa de aprovação: <strong>[XX]%</strong> | Maior nota: <strong>[XX]</strong> | Menor nota: <strong>[XX]</strong>
+        </div>
+
+        <h3>4.2 Distribuição de Notas</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Faixa de Nota</th>
+                    <th>Quantidade</th>
+                    <th>Percentual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>90-100</td>
+                    <td>[XX]</td>
+                    <td>[XX]%</td>
+                </tr>
+                <tr>
+                    <td>80-89</td>
+                    <td>[XX]</td>
+                    <td>[XX]%</td>
+                </tr>
+                 <tr>
+                    <td>&lt;70</td>
+                    <td>[XX]</td>
+                    <td>[XX]%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. FEEDBACK E AÇÕES DE FOLLOW-UP</h2>
+        <h3>5.1 Sugestões de Melhoria</h3>
+        <ol>
+            <li>[Sugestão 1]</li>
+            <li>[Sugestão 2]</li>
+        </ol>
+        <h3>5.2 Ações de Follow-up</h3>
+        <ol>
+            <li>[Ação 1] - Responsável: [Nome] - Prazo: [Data]</li>
+            <li>[Ação 2] - Responsável: [Nome] - Prazo: [Data]</li>
+        </ol>
+
+    </div> <!-- Fim do container -->
+
+</body>
+</html>

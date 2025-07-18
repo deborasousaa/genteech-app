@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Competências - [NOME DA ÁREA]</title>
+    <style>
+        /* --- Estilos Gerais (Consistentes) --- */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px; /* Aumentei um pouco para a tabela caber melhor */
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Estilos do Cabeçalho --- */
+        .matrix-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #004080;
+            padding-bottom: 15px;
+        }
+        .matrix-header h1 {
+            margin: 0;
+            font-size: 26px;
+            color: #004080;
+        }
+        .matrix-header p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        /* --- Estilos do Corpo do Documento --- */
+        h2, h3 {
+            color: #004080;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 16px;
+            border-bottom: 1px dashed #e0e0e0;
+            margin-top: 25px;
+        }
+        
+        /* --- Estilos da Legenda e Tabelas --- */
+        .legend {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px; /* Fonte menor para caber mais dados */
+            margin-top: 15px;
+        }
+        .matrix-table th, .matrix-table td {
+            border: 1px solid #ccc;
+            padding: 6px;
+            text-align: center;
+        }
+        .matrix-table th {
+            background-color: #f2f2f2;
+            vertical-align: bottom;
+        }
+        .matrix-table .text-left {
+            text-align: left;
+        }
+        .matrix-table .competency-col {
+            writing-mode: vertical-rl; /* Escreve o texto na vertical */
+            transform: rotate(180deg);
+            white-space: nowrap;
+        }
+        .level {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 50%; /* Deixa o fundo redondo */
+            color: white;
+            font-weight: bold;
+        }
+        .level-0 { background-color: #ccc; }
+        .level-1 { background-color: #f4a261; }
+        .level-2 { background-color: #e9c46a; }
+        .level-3 { background-color: #2a9d8f; }
+        .level-4 { background-color: #264653; }
+        .gap {
+            color: #c00;
+            font-weight: bold;
+        }
+        .ok {
+            color: green;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ========= CABEÇALHO ========= -->
+        <div class="matrix-header">
+            <h1>MATRIZ DE COMPETÊNCIAS</h1>
+            <p>[NOME DA ÁREA/DEPARTAMENTO]</p>
+        </div>
+
+        <!-- ========= LEGENDA ========= -->
+        <h2>1. LEGENDA DE NÍVEIS</h2>
+        <div class="legend">
+            <strong>0:</strong> Não possui | 
+            <strong>1:</strong> Básico | 
+            <strong>2:</strong> Intermediário | 
+            <strong>3:</strong> Avançado | 
+            <strong>4:</strong> Especialista
+        </div>
+
+        <!-- ========= MATRIZ DE COMPETÊNCIAS ========= -->
+        <h2>2. MATRIZ POR FUNCIONÁRIO</h2>
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th class="text-left">Funcionário</th>
+                    <th class="text-left">Cargo</th>
+                    <th class="competency-col">Competência Técnica 1</th>
+                    <th class="competency-col">Competência Técnica 2</th>
+                    <th class="competency-col">Liderança</th>
+                    <th class="competency-col">Comunicação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-left">[Nome do Funcionário 1]</td>
+                    <td class="text-left">[Cargo 1]</td>
+                    <td><span class="level level-3">3</span> / <span class="level level-3">3</span> <span class="ok">✅</span></td>
+                    <td><span class="level level-2">2</span> / <span class="level level-4">4</span> <span class="gap">⚠️</span></td>
+                    <td><span class="level level-4">4</span> / <span class="level level-4">4</span> <span class="ok">✅</span></td>
+                    <td><span class="level level-2">2</span> / <span class="level level-3">3</span> <span class="gap">⚠️</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">[Nome do Funcionário 2]</td>
+                    <td class="text-left">[Cargo 2]</td>
+                    <td><span class="level level-2">2</span> / <span class="level level-2">2</span> <span class="ok">✅</span></td>
+                    <td><span class="level level-3">3</span> / <span class="level level-3">3</span> <span class="ok">✅</span></td>
+                    <td><span class="level level-2">2</span> / <span class="level level-3">3</span> <span class="gap">⚠️</span></td>
+                    <td><span class="level level-3">3</span> / <span class="level level-3">3</span> <span class="ok">✅</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. ANÁLISE DE GAPS</h2>
+        <h3>3.1 Gaps Críticos</h3>
+        <ul>
+            <li><strong>Competência X:</strong> [Lista de funcionários afetados] - Impacto: Alto</li>
+            <li><strong>Competência Y:</strong> [Lista de funcionários afetados] - Impacto: Médio</li>
+        </ul>
+
+        <h2>4. PLANO DE DESENVOLVIMENTO</h2>
+        <p>Com base na análise de gaps, as seguintes ações são prioritárias:</p>
+        <ol>
+            <li><strong>Ação:</strong> [Treinamento em Competência Y] | <strong>Público:</strong> [Qtd] funcionários | <strong>Prazo:</strong> [DD/MM/AAAA]</li>
+            <li><strong>Ação:</strong> [Programa de Mentoria em Liderança] | <strong>Público:</strong> [Qtd] funcionários | <strong>Prazo:</strong> [DD/MM/AAAA]</li>
+        </ol>
+
+    </div> <!-- Fim do container -->
+
+</body>
+</html>

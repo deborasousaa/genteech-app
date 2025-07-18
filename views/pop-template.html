@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POP - [NOME DO PROCEDIMENTO]</title>
+    <style>
+        /* --- Estilos Gerais --- */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Estilos do Cabeçalho --- */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .header-table th, .header-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .header-table .logo-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+        .header-table .title-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #f2f2f2;
+        }
+
+        /* --- Estilos do Corpo do Documento --- */
+        h1, h2, h3 {
+            color: #004080; /* Um azul corporativo */
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 16px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        strong {
+            color: #333;
+        }
+
+        /* --- Estilos da Tabela de Revisões --- */
+        .revisions-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .revisions-table th, .revisions-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .revisions-table th {
+            background-color: #f2f2f2;
+        }
+        .revisions-table td:nth-child(3) { /* Coluna de Alterações */
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ========= CABEÇALHO ========= -->
+        <table class="header-table">
+            <tr>
+                <td rowspan="2" class="logo-cell" style="width:25%;">
+                    SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.
+                </td>
+                <td colspan="2" class="title-cell">
+                    PROCEDIMENTO OPERACIONAL PADRÃO
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Código:</strong> POP-[ÁREA]-[NÚMERO]-Rev[XX]</td>
+                <td><strong>Título:</strong> [NOME DO PROCEDIMENTO]</td>
+            </tr>
+            <tr>
+                <td><strong>Área:</strong> [ÁREA RESPONSÁVEL]</td>
+                <td><strong>Data de Elaboração:</strong> [DD/MM/AAAA]</td>
+                <td><strong>Próxima Revisão:</strong> [DD/MM/AAAA]</td>
+            </tr>
+        </table>
+
+        <!-- ========= CORPO DO DOCUMENTO ========= -->
+        <h1>[TÍTULO DO PROCEDIMENTO]</h1>
+
+        <h2>1. OBJETIVO</h2>
+        <p>Descrever claramente o propósito e finalidade do procedimento.</p>
+
+        <h2>2. ESCOPO</h2>
+        <p>Definir onde e quando este procedimento se aplica.</p>
+
+        <h2>3. RESPONSABILIDADES</h2>
+        <ul>
+            <li><strong>[Cargo/Função]:</strong> [Responsabilidade específica]</li>
+            <li><strong>[Cargo/Função]:</strong> [Responsabilidade específica]</li>
+        </ul>
+
+        <h2>4. DEFINIÇÕES E SIGLAS</h2>
+        <ul>
+            <li><strong>[Termo]:</strong> [Definição]</li>
+            <li><strong>[Sigla]:</strong> [Significado]</li>
+        </ul>
+
+        <h2>5. PROCEDIMENTO</h2>
+        <h3>5.1 Preparação</h3>
+        <ol>
+            <li>[Passo 1]</li>
+            <li>[Passo 2]</li>
+            <li>[Passo 3]</li>
+        </ol>
+
+        <h3>5.2 Execução</h3>
+        <ol>
+            <li>[Passo 1]</li>
+            <li>[Passo 2]</li>
+            <li>[Passo 3]</li>
+        </ol>
+
+        <h3>5.3 Finalização</h3>
+        <ol>
+            <li>[Passo 1]</li>
+            <li>[Passo 2]</li>
+            <li>[Passo 3]</li>
+        </ol>
+
+        <h2>6. REGISTROS</h2>
+        <p>- [Nome do Registro] - [Código] - [Tempo de Retenção]</p>
+
+        <h2>7. DOCUMENTOS RELACIONADOS</h2>
+        <p>- [Documento 1] - [Código]</p>
+        <p>- [Documento 2] - [Código]</p>
+
+        <h2>8. ANEXOS</h2>
+        <p>- Anexo A: [Descrição]</p>
+        <p>- Anexo B: [Descrição]</p>
+
+        <h2>9. CONTROLE DE REVISÕES</h2>
+        <table class="revisions-table">
+            <thead>
+                <tr>
+                    <th>Revisão</th>
+                    <th>Data</th>
+                    <th>Alterações</th>
+                    <th>Elaborado por</th>
+                    <th>Aprovado por</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>00</td>
+                    <td>[Data]</td>
+                    <td>Criação do documento</td>
+                    <td>[Nome]</td>
+                    <td>[Nome]</td>
+                </tr>
+                <tr>
+                    <td>01</td>
+                    <td>[Data]</td>
+                    <td>[Descrição das alterações]</td>
+                    <td>[Nome]</td>
+                    <td>[Nome]</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- Fim do container -->
+
+</body>
+</html>
+

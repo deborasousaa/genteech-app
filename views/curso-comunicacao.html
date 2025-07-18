@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso: Comunicação Eficaz</title>
+  <link rel="stylesheet" href="/assets/css/style-genteech.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">SALVABRAS</div>
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="pdi.html">📈 PDIs</a>
+      <a href="cursos.html">🎓 Cursos</a>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="welcome-section">
+      <h2 class="section-title">Curso: Comunicação Eficaz</h2>
+      <p>Este curso tem como objetivo aprimorar sua comunicação no ambiente de trabalho.</p>
+      <h3>Módulo 1: Fundamentos</h3>
+      <p>Comunicação eficaz é a base das boas relações. Envolve escuta ativa, clareza e empatia.</p>
+      <h3>Módulo 2: Comunicação Não Violenta</h3>
+      <p>Aprenda a se expressar com empatia e firmeza. Pratique com situações reais do seu dia a dia.</p>
+      <h3>Módulo 3: Aplicação Prática</h3>
+      <ul>
+        <li>Realize uma simulação de reunião com colega</li>
+        <li>Use a técnica da CNV (Comunicação Não Violenta)</li>
+      </ul>
+      <button class="btn btn-orange" onclick="concluirCurso()">✅ Concluir Curso</button>
+    </section>
+  </main>
+  <footer class="main-footer">
+    <p><strong>SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.</strong></p>
+    <p>&copy; 2025 SalvaBras - Todos os direitos reservados.</p>
+  </footer>
+  <script>
+    function concluirCurso() {
+      const nome = prompt("Digite o nome do colaborador para registrar a conclusão:");
+      if (!nome) return alert("Você precisa digitar um nome.");
+      const cursos = JSON.parse(localStorage.getItem("cursosConcluidos") || "{}");
+      if (!cursos[nome]) cursos[nome] = [];
+      cursos[nome].push("Comunicação Eficaz");
+      localStorage.setItem("cursosConcluidos", JSON.stringify(cursos));
+      const pdis = JSON.parse(localStorage.getItem("pdis") || "{}");
+      if (!pdis[nome]) pdis[nome] = [];
+      pdis[nome].push({
+        objetivo: "Desenvolver comunicação eficaz",
+        acao: "Conclusão do curso interno de Comunicação",
+        prazo: new Date().toLocaleDateString()
+      });
+      localStorage.setItem("pdis", JSON.stringify(pdis));
+      alert("Curso concluído com sucesso! PDI atualizado.");
+      window.location.href = "pdi.html";
+    }
+  </script>
+</body>
+</html>

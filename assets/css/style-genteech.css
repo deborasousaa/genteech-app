@@ -1,0 +1,349 @@
+/* ===================================================================
+   GENTEECH THEME V2.0 - ARQUIVO DE ESTILO PRINCIPAL
+   Identidade: Genteech (Playfair Display + Montserrat)
+   Cores: Terracota (#D45D5D) -> Dourado Suave (#C1A46E)
+   =================================================================== */
+
+/* --- 🎨 VARIÁVEIS DE COR E FONTE (RAIZ DO PROJETO) 🎨 --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;700&display=swap' );
+
+:root {
+    /* Cores Primárias */
+    --genteech-terracotta: #D45D5D;
+    --genteech-gold: #C1A46E;
+    --genteech-gradient: linear-gradient(110deg, var(--genteech-terracotta) 0%, var(--genteech-gold) 100%);
+
+    /* Cores de UI (Interface do Usuário) */
+    --genteech-dark: #2C3A47;      /* Para textos principais e títulos */
+    --genteech-secondary: #5C5C5C; /* Para textos secundários e parágrafos */
+    --genteech-light-gray: #F7F4EF; /* Fundo principal da página */
+    --genteech-white: #FFFFFF;      /* Fundo de cards e elementos */
+    --genteech-border: #EAEAEA;    /* Cor de bordas sutis */
+
+    /* Cores de Ação e Status */
+    --genteech-success: #4CAF50; /* Verde para sucesso */
+    --genteech-info: #2196F3;    /* Azul para informação */
+    --genteech-warning: #FFC107; /* Amarelo para avisos */
+
+    /* Tipografia */
+    --font-display: 'Playfair Display', serif; /* Para o logo e títulos de grande destaque */
+    --font-body: 'Montserrat', sans-serif;    /* Para todo o resto do corpo e UI */
+
+    /* Sombras */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
+    --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* --- ESTILOS GERAIS E RESET --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--genteech-light-gray);
+    color: var(--genteech-secondary);
+    margin: 0;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto; 
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 60px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--genteech-dark);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+h2.section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    font-family: var(--font-display);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* --- HEADER E NAVEGAÇÃO --- */
+.main-header {
+    background-color: var(--genteech-white);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid var(--genteech-border);
+}
+
+.main-header .logo {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: var(--genteech-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.main-header nav a {
+    color: var(--genteech-dark);
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.main-header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--genteech-gradient);
+    transition: width 0.3s ease;
+}
+
+.main-header nav a:hover::after {
+    width: 100%;
+}
+
+/* --- BOTÕES --- */
+.btn {
+    color: var(--genteech-white);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: var(--genteech-gradient);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- CARDS (info-card, course-card, etc.) --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.info-card {
+    background-color: var(--genteech-white);
+    border: 1px solid var(--genteech-border);
+    border-radius: 8px;
+    padding: 30px;
+    text-decoration: none;
+    color: var(--genteech-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+}
+
+.info-card .icon {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    background: var(--genteech-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.info-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    font-size: 1rem;
+    color: var(--genteech-secondary);
+    flex-grow: 1;
+}
+
+.info-card .btn {
+    margin-top: 20px;
+    align-self: flex-start;
+}
+
+/* --- TABELAS DE DADOS (PDI) --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin: 30px 0;
+    background-color: var(--genteech-white);
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    border-bottom: 1px solid var(--genteech-border);
+    padding: 16px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: var(--genteech-light-gray);
+    color: var(--genteech-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table .text-left {
+    text-align: left;
+}
+
+.data-table .gap {
+    color: var(--genteech-terracotta);
+    font-weight: 700;
+}
+
+/* --- FOOTER --- */
+.main-footer {
+    background-color: var(--genteech-dark);
+    color: var(--genteech-light-gray);
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+}
+
+.main-footer p {
+    margin: 0.5rem 0;
+    color: var(--genteech-light-gray);
+    opacity: 0.8;
+}
+
+.main-footer strong {
+    font-weight: 700;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    h2.section-title {
+        font-size: 2.2rem;
+    }
+
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .main-header nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .main-header nav a {
+        margin-left: 0;
+    }
+}
+/* --- ESTILOS ADICIONAIS PARA A PÁGINA INDEX --- */
+
+.hero-banner {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: var(--genteech-dark);
+    color: var(--genteech-white);
+}
+
+.hero-banner h1 {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--genteech-white);
+}
+
+.hero-banner p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 1rem auto 0;
+}
+
+.welcome-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: var(--genteech-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    color: var(--genteech-secondary);
+    font-weight: 500;
+}
+
+/* Ajuste para o botão dentro do card ficar sempre no final */
+.info-card .btn {
+    margin-top: auto;
+}

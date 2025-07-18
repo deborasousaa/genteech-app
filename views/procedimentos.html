@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedimentos e Manuais - Biblioteca SalvaBras</title>
+    <!-- PASSO 1: Linkando para o nosso CSS central -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">SALVABRAS</div>
+        <nav>
+            <a href="index.html">🏠 Início</a>
+            <a href="treinamentos.html">📚 Treinamentos</a>
+            <a href="pdi.html">📈 PDIs</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Procedimentos e Manuais</h1>
+        <p class="page-subtitle">Consulte os documentos oficiais da SalvaBras. Use a busca para encontrar o que precisa.</p>
+
+        <!-- PASSO 2: O container onde a lista será inserida dinamicamente.
+             A lista estática foi removida daqui. -->
+        <div id="procedimentos-list" class="card-grid">
+            <!-- A lista de documentos do servidor aparecerá aqui! -->
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p><strong>SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.</strong></p>
+        <p>&copy; 2025 SalvaBras - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- PASSO 3: Adicionando o script para buscar e renderizar os dados -->
+    <script>
+        const procedimentosListContainer = document.getElementById('procedimentos-list');
+        const API_URL = 'http://localhost:3000/api/procedimentos';
+
+        async function buscarERenderizarProcedimentos( ) {
+            try {
+                const response = await fetch(API_URL);
+                const procedimentos = await response.json();
+
+                procedimentosListContainer.innerHTML = '';
+
+                if (procedimentos.length === 0) {
+                    procedimentosListContainer.innerHTML = '<p>Nenhum procedimento encontrado.</p>';
+                    return;
+                }
+
+                procedimentos.forEach(proc => {
+                    const card = document.createElement('div');
+                    // Reutilizando o estilo de card da nossa página inicial
+                    card.className = 'info-card'; 
+
+                    let icon = '📋';
+                    let btnClass = 'btn-blue';
+                    if (proc.tipo === 'POP') {
+                        icon = '⚙️';
+                        btnClass = 'btn-orange';
+                    } else if (proc.tipo === 'Manual') {
+                        icon = '📘';
+                        btnClass = 'btn-green';
+                    }
+
+                    card.innerHTML = `
+                        <div class="icon">${icon}</div>
+                        <h3>${proc.codigo}</h3>
+                        <p><strong>Título:</strong> ${proc.titulo}</p>
+                        <p><strong>Área:</strong> ${proc.area} | <strong>Versão:</strong> ${proc.versao}</p>
+                        <a href="${proc.link}" class="btn ${btnClass}">Ver Documento</a>
+                    `;
+                    procedimentosListContainer.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('Erro ao buscar procedimentos da API:', error);
+                procedimentosListContainer.innerHTML = '<p style="color: red;">Erro ao carregar os documentos. Verifique se o servidor está rodando.</p>';
+            }
+        }
+
+        buscarERenderizarProcedimentos();
+    </script>
+
+</body>
+</html>

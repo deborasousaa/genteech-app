@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDI Detalhado - Genteech</title>
+  <link rel="stylesheet" href="style-genteech.css" />
+  <style>
+    /* Estilos para página de detalhe */
+    .pdi-header-detalhado {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .colaborador-titulo {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 0 0 10px 0;
+    }
+    
+    .objetivo-titulo {
+      font-size: 18px;
+      opacity: 0.9;
+      margin: 0 0 20px 0;
+    }
+    
+    .pdi-meta-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .meta-item {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+    }
+    
+    .meta-label {
+      font-size: 12px;
+      opacity: 0.8;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    
+    .meta-value {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .progress-detalhado {
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      height: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+    
+    .progress-fill-detalhado {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50, #66bb6a);
+      border-radius: 8px;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    
+    .secao-cursos {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .secao-titulo {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 0 20px 0;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .curso-item {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 15px 0;
+      border-left: 4px solid #ddd;
+      transition: all 0.3s ease;
+    }
+    
+    .curso-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .curso-item.concluido { border-left-color: #4caf50; background: #f1f8e9; }
+    .curso-item.em_andamento { border-left-color: #2196f3; background: #e3f2fd; }
+    .curso-item.planejado { border-left-color: #ff9800; background: #fff3e0; }
+    .curso-item.cancelado { border-left-color: #f44336; background: #ffebee; }
+    
+    .curso-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .curso-nome {
+      font-size: 16px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 0;
+    }
+    
+    .curso-tipo {
+      background: #e0e0e0;
+      color: #666;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    
+    .curso-detalhes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+    
+    .curso-detalhe-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    
+    .detalhe-label {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    
+    .detalhe-value {
+      font-size: 14px;
+      color: #2c3e50;
+    }
+    
+    .curso-status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .status-concluido { background: #e8f5e8; color: #2e7d32; }
+    .status-em_andamento { background: #e3f2fd; color: #1976d2; }
+    .status-planejado { background: #fff3e0; color: #f57c00; }
+    .status-cancelado { background: #ffebee; color: #d32f2f; }
+    
+    .avaliacao-estrelas {
+      color: #ffc107;
+      font-size: 16px;
+    }
+    
+    .certificado-info {
+      background: #e8f5e8;
+      border: 1px solid #4caf50;
+      border-radius: 6px;
+      padding: 10px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn-voltar {
+      background: #6c757d;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-voltar:hover {
+      background: #5a6268;
+      transform: translateY(-1px);
+    }
+    
+    .competencias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .competencia-item {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #2196f3;
+    }
+    
+    .competencia-nome {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .nivel-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 5px 0;
+    }
+    
+    .nivel-bar {
+      flex: 1;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .nivel-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2196f3, #64b5f6);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    .observacoes-section {
+      background: #fff9c4;
+      border: 1px solid #f9a825;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #e0e0e0;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -23px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #2196f3;
+    }
+    
+    .timeline-date {
+      font-size: 12px;
+      color: #666;
+      font-weight: bold;
+    }
+    
+    .timeline-content {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo">GENTEECH</div>
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="treinamentos.html">📚 Treinamentos</a>
+      <a href="pdi-gestor.html">📈 PDIs Equipe</a>
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="#">👤 Perfil</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Botão Voltar -->
+    <a href="pdi-gestor.html" class="btn-voltar">
+      ← Voltar para PDIs da Equipe
+    </a>
+
+    <!-- Header do PDI -->
+    <div class="pdi-header-detalhado" id="pdi-header">
+      <!-- Dados serão carregados aqui -->
+    </div>
+
+    <!-- Competências Alvo -->
+    <div class="secao-cursos">
+      <h3 class="secao-titulo">🎯 Competências Alvo</h3>
+      <div class="competencias-grid" id="competencias-grid">
+        <!-- Competências serão carregadas aqui -->
+      </div>
+    </div>
+
+    <!-- Cursos Concluídos -->
+    <div class="secao-cursos">
+      <h3 class="secao-titulo">✅ Cursos Concluídos</h3>
+      <div id="cursos-concluidos">
+        <!-- Cursos concluídos serão carregados aqui -->
+      </div>
+    </div>
+
+    <!-- Cursos Planejados -->
+    <div class="secao-cursos">
+      <h3 class="secao-titulo">📋 Cursos Planejados</h3>
+      <div id="cursos-planejados">
+        <!-- Cursos planejados serão carregados aqui -->
+      </div>
+    </div>
+
+    <!-- Timeline de Progresso -->
+    <div class="secao-cursos">
+      <h3 class="secao-titulo">📈 Timeline de Progresso</h3>
+      <div class="timeline" id="timeline-progresso">
+        <!-- Timeline será carregada aqui -->
+      </div>
+    </div>
+
+    <!-- Observações -->
+    <div class="observacoes-section" id="observacoes-section">
+      <!-- Observações serão carregadas aqui -->
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <p><strong>GENTEECH - Gestão Inteligente de Pessoas</strong></p>
+    <p>Links Úteis: <a href="#">Site Principal</a> | <a href="#">Política de Privacidade</a></p>
+    <p>&copy; 2025 Genteech - Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // ===================================================================
+    // SCRIPT DA PÁGINA DE PDI DETALHE - VERSÃO 1.0 - GENTEECH
+    // Funcionalidades: visualização detalhada, histórico de cursos, timeline
+    // ===================================================================
+
+    // --- Configuração da API ---
+    const API_URL = 'http://localhost:3000/api';
+
+    // --- Elementos da Página ---
+    const pdiHeader = document.getElementById('pdi-header');
+    const competenciasGrid = document.getElementById('competencias-grid');
+    const cursosConcluidos = document.getElementById('cursos-concluidos');
+    const cursosPlanejados = document.getElementById('cursos-planejados');
+    const timelineProgresso = document.getElementById('timeline-progresso');
+    const observacoesSection = document.getElementById('observacoes-section');
+
+    // --- Funções Auxiliares ---
+    function getURLParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return 'Não definido';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('pt-BR');
+    }
+
+    function getStatusText(status) {
+      const statusMap = {
+        'em_andamento': 'Em Andamento',
+        'concluido': 'Concluído',
+        'atrasado': 'Atrasado',
+        'vencendo': 'Vencendo',
+        'pausado': 'Pausado',
+        'planejado': 'Planejado',
+        'cancelado': 'Cancelado'
+      };
+      return statusMap[status] || status;
+    }
+
+    function getTipoText(tipo) {
+      const tipoMap = {
+        'curso': 'Curso',
+        'treinamento': 'Treinamento',
+        'workshop': 'Workshop',
+        'certificacao': 'Certificação',
+        'mentoria': 'Mentoria',
+        'leitura': 'Leitura',
+        'projeto': 'Projeto'
+      };
+      return tipoMap[tipo] || tipo;
+    }
+
+    function renderEstrelas(nota) {
+      if (!nota) return '';
+      const estrelas = '★'.repeat(nota) + '☆'.repeat(5 - nota);
+      return `<span class="avaliacao-estrelas">${estrelas}</span>`;
+    }
+
+    // --- Função para Renderizar Header do PDI ---
+    function renderizarHeader(pdi) {
+      const diasRestantes = Math.ceil((new Date(pdi.prazo) - new Date()) / (1000 * 60 * 60 * 24));
+      const prazoTexto = diasRestantes < 0 ? `${Math.abs(diasRestantes)} dias atrasado` : 
+                        diasRestantes === 0 ? 'Vence hoje' : 
+                        `${diasRestantes} dias restantes`;
+
+      pdiHeader.innerHTML = `
+        <h1 class="colaborador-titulo">${pdi.nomeColaborador}</h1>
+        <p class="objetivo-titulo">${pdi.objetivo}</p>
+        
+        <div class="progress-detalhado">
+          <div class="progress-fill-detalhado" style="width: ${pdi.progresso}%">
+            ${pdi.progresso}% Concluído
+          </div>
+        </div>
+        
+        <div class="pdi-meta-info">
+          <div class="meta-item">
+            <div class="meta-label">Status</div>
+            <div class="meta-value">${getStatusText(pdi.status)}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Prioridade</div>
+            <div class="meta-value">${pdi.prioridade.charAt(0).toUpperCase() + pdi.prioridade.slice(1)}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Prazo</div>
+            <div class="meta-value">${formatDate(pdi.prazo)}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Tempo Restante</div>
+            <div class="meta-value">${prazoTexto}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Total de Cursos</div>
+            <div class="meta-value">${pdi.totalCursos}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Última Atualização</div>
+            <div class="meta-value">${formatDate(pdi.dataUltimaAtualizacao)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- Função para Renderizar Competências ---
+    function renderizarCompetencias(competencias) {
+      if (!competencias || competencias.length === 0) {
+        competenciasGrid.innerHTML = '<p>Nenhuma competência específica definida.</p>';
+        return;
+      }
+
+      competenciasGrid.innerHTML = competencias.map(comp => `
+        <div class="competencia-item">
+          <div class="competencia-nome">${comp.nome}</div>
+          <div class="nivel-progress">
+            <span>Atual:</span>
+            <div class="nivel-bar">
+              <div class="nivel-fill" style="width: ${(comp.nivelAtual / 5) * 100}%"></div>
+            </div>
+            <span>${comp.nivelAtual}/5</span>
+          </div>
+          <div class="nivel-progress">
+            <span>Meta:</span>
+            <div class="nivel-bar">
+              <div class="nivel-fill" style="width: ${(comp.nivelDesejado / 5) * 100}%"></div>
+            </div>
+            <span>${comp.nivelDesejado}/5</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- Função para Renderizar Curso ---
+    function renderizarCurso(curso) {
+      return `
+        <div class="curso-item ${curso.status}">
+          <div class="curso-header">
+            <h4 class="curso-nome">${curso.nome}</h4>
+            <div>
+              <span class="curso-tipo">${getTipoText(curso.tipo)}</span>
+              <span class="curso-status-badge status-${curso.status}">${getStatusText(curso.status)}</span>
+            </div>
+          </div>
+          
+          <div class="curso-detalhes">
+            ${curso.dataInicio ? `
+              <div class="curso-detalhe-item">
+                <span class="detalhe-label">Data Início</span>
+                <span class="detalhe-value">${formatDate(curso.dataInicio)}</span>
+              </div>
+            ` : ''}
+            
+            ${curso.dataConclusao ? `
+              <div class="curso-detalhe-item">
+                <span class="detalhe-label">Data Conclusão</span>
+                <span class="detalhe-value">${formatDate(curso.dataConclusao)}</span>
+              </div>
+            ` : ''}
+            
+            ${curso.prazoLimite ? `
+              <div class="curso-detalhe-item">
+                <span class="detalhe-label">Prazo Limite</span>
+                <span class="detalhe-value">${formatDate(curso.prazoLimite)}</span>
+              </div>
+            ` : ''}
+            
+            ${curso.cargaHoraria ? `
+              <div class="curso-detalhe-item">
+                <span class="detalhe-label">Carga Horária</span>
+                <span class="detalhe-value">${curso.cargaHoraria}h</span>
+              </div>
+            ` : ''}
+            
+            ${curso.fornecedor ? `
+              <div class="curso-detalhe-item">
+                <span class="detalhe-label">Fornecedor</span>
+                <span class="detalhe-value">${curso.fornecedor}</span>
+              </div>
+            ` : ''}
+            
+            ${curso.custo ? `
+              <div class="curso-detalhe-item">
+                <span class="detalhe-label">Custo</span>
+                <span class="detalhe-value">R$ ${curso.custo.toFixed(2)}</span>
+              </div>
+            ` : ''}
+          </div>
+          
+          ${curso.avaliacao && curso.avaliacao.nota ? `
+            <div style="margin: 15px 0;">
+              <strong>Avaliação:</strong> ${renderEstrelas(curso.avaliacao.nota)}
+              ${curso.avaliacao.comentario ? `<br><em>"${curso.avaliacao.comentario}"</em>` : ''}
+            </div>
+          ` : ''}
+          
+          ${curso.certificado && curso.certificado.possui ? `
+            <div class="certificado-info">
+              <span>🏆</span>
+              <div>
+                <strong>Certificado obtido</strong>
+                ${curso.certificado.dataEmissao ? `<br>Emitido em: ${formatDate(curso.certificado.dataEmissao)}` : ''}
+              </div>
+            </div>
+          ` : ''}
+          
+          ${curso.observacoes ? `
+            <div style="margin: 15px 0; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 6px;">
+              <strong>Observações:</strong> ${curso.observacoes}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    // --- Função para Carregar PDI Detalhado ---
+    async function carregarPDIDetalhado() {
+      const pdiId = getURLParameter('id');
+      
+      if (!pdiId) {
+        alert('ID do PDI não encontrado!');
+        window.location.href = 'pdi-gestor.html';
+        return;
+      }
+
+      try {
+        // Simulando dados detalhados até implementar o MongoDB
+        const pdiDetalhado = {
+          id: pdiId,
+          nomeColaborador: 'Ana Silva',
+          objetivo: 'Dominar Excel Avançado para Análise de Dados',
+          descricaoDetalhada: 'Desenvolver competências avançadas em Excel para realizar análises complexas de dados, criar dashboards interativos e automatizar relatórios.',
+          prazo: '2025-12-31',
+          progresso: 60,
+          status: 'em_andamento',
+          prioridade: 'alta',
+          totalCursos: 5,
+          cursosConcluidos: 3,
+          dataUltimaAtualizacao: '2025-07-10',
+          dataCriacao: '2025-01-15',
+          competenciasAlvo: [
+            { nome: 'Fórmulas Avançadas', nivelAtual: 3, nivelDesejado: 5 },
+            { nome: 'Tabelas Dinâmicas', nivelAtual: 2, nivelDesejado: 4 },
+            { nome: 'Power Query', nivelAtual: 1, nivelDesejado: 4 },
+            { nome: 'Dashboards', nivelAtual: 2, nivelDesejado: 5 }
+          ],
+          cursosFeitos: [
+            {
+              nome: 'Excel Básico ao Intermediário',
+              tipo: 'curso',
+              status: 'concluido',
+              dataInicio: '2025-01-20',
+              dataConclusao: '2025-02-15',
+              cargaHoraria: 40,
+              fornecedor: 'Udemy',
+              custo: 89.90,
+              avaliacao: { nota: 5, comentario: 'Excelente curso, muito didático' },
+              certificado: { possui: true, dataEmissao: '2025-02-15' }
+            },
+            {
+              nome: 'Fórmulas Avançadas no Excel',
+              tipo: 'curso',
+              status: 'concluido',
+              dataInicio: '2025-03-01',
+              dataConclusao: '2025-03-25',
+              cargaHoraria: 30,
+              fornecedor: 'Coursera',
+              custo: 150.00,
+              avaliacao: { nota: 4, comentario: 'Bom conteúdo, mas poderia ter mais exercícios práticos' },
+              certificado: { possui: true, dataEmissao: '2025-03-25' }
+            },
+            {
+              nome: 'Introdução ao Power Query',
+              tipo: 'workshop',
+              status: 'concluido',
+              dataInicio: '2025-05-10',
+              dataConclusao: '2025-05-12',
+              cargaHoraria: 16,
+              fornecedor: 'Empresa - Treinamento Interno',
+              observacoes: 'Workshop ministrado pelo consultor externo'
+            }
+          ],
+          cursosAFazer: [
+            {
+              nome: 'Dashboards Avançados no Excel',
+              tipo: 'curso',
+              status: 'em_andamento',
+              dataInicio: '2025-07-01',
+              prazoLimite: '2025-08-30',
+              cargaHoraria: 35,
+              fornecedor: 'LinkedIn Learning',
+              custo: 200.00,
+              observacoes: 'Curso em andamento, 60% concluído'
+            },
+            {
+              nome: 'Power BI para Usuários Excel',
+              tipo: 'curso',
+              status: 'planejado',
+              prazoLimite: '2025-11-30',
+              cargaHoraria: 40,
+              fornecedor: 'Microsoft Learn',
+              observacoes: 'Aguardando conclusão do curso de Dashboards'
+            }
+          ],
+          observacoesGestor: 'Ana tem mostrado excelente progresso e dedicação. Recomendo priorizar o curso de Power BI após conclusão do atual.',
+          observacoesRH: 'Colaboradora engajada no desenvolvimento. Considerar oportunidades de aplicação prática dos conhecimentos adquiridos.'
+        };
+
+        renderizarHeader(pdiDetalhado);
+        renderizarCompetencias(pdiDetalhado.competenciasAlvo);
+        
+        // Renderizar cursos concluídos
+        if (pdiDetalhado.cursosFeitos && pdiDetalhado.cursosFeitos.length > 0) {
+          cursosConcluidos.innerHTML = pdiDetalhado.cursosFeitos.map(renderizarCurso).join('');
+        } else {
+          cursosConcluidos.innerHTML = '<p>Nenhum curso concluído ainda.</p>';
+        }
+        
+        // Renderizar cursos planejados
+        if (pdiDetalhado.cursosAFazer && pdiDetalhado.cursosAFazer.length > 0) {
+          cursosPlanejados.innerHTML = pdiDetalhado.cursosAFazer.map(renderizarCurso).join('');
+        } else {
+          cursosPlanejados.innerHTML = '<p>Nenhum curso planejado.</p>';
+        }
+        
+        // Renderizar timeline
+        const timelineItems = [
+          { data: pdiDetalhado.dataCriacao, evento: 'PDI criado' },
+          ...pdiDetalhado.cursosFeitos.map(curso => ({
+            data: curso.dataConclusao,
+            evento: `Concluído: ${curso.nome}`
+          })),
+          { data: pdiDetalhado.dataUltimaAtualizacao, evento: 'Última atualização' }
+        ].sort((a, b) => new Date(a.data) - new Date(b.data));
+        
+        timelineProgresso.innerHTML = timelineItems.map(item => `
+          <div class="timeline-item">
+            <div class="timeline-date">${formatDate(item.data)}</div>
+            <div class="timeline-content">${item.evento}</div>
+          </div>
+        `).join('');
+        
+        // Renderizar observações
+        observacoesSection.innerHTML = `
+          <h4>💬 Observações</h4>
+          ${pdiDetalhado.descricaoDetalhada ? `
+            <div style="margin: 15px 0;">
+              <strong>Descrição Detalhada:</strong><br>
+              ${pdiDetalhado.descricaoDetalhada}
+            </div>
+          ` : ''}
+          ${pdiDetalhado.observacoesGestor ? `
+            <div style="margin: 15px 0;">
+              <strong>Observações do Gestor:</strong><br>
+              ${pdiDetalhado.observacoesGestor}
+            </div>
+          ` : ''}
+          ${pdiDetalhado.observacoesRH ? `
+            <div style="margin: 15px 0;">
+              <strong>Observações do RH:</strong><br>
+              ${pdiDetalhado.observacoesRH}
+            </div>
+          ` : ''}
+        `;
+        
+      } catch (error) {
+        console.error('Erro ao carregar PDI detalhado:', error);
+        alert('Erro ao carregar detalhes do PDI.');
+        window.location.href = 'pdi-gestor.html';
+      }
+    }
+
+    // --- Inicialização ---
+    document.addEventListener('DOMContentLoaded', carregarPDIDetalhado);
+  </script>
+</body>
+</html>
+

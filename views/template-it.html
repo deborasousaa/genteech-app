@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrução de Trabalho - [NOME DA INSTRUÇÃO]</title>
+    <style>
+        /* --- Estilos Gerais (Consistentes com as outras páginas) --- */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Estilos do Cabeçalho (Reutilizado do POP) --- */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .header-table th, .header-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .header-table .logo-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+        .header-table .title-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #f2f2f2;
+        }
+
+        /* --- Estilos do Corpo do Documento --- */
+        h1, h2, h3 {
+            color: #004080;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 16px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .critical-point {
+            color: #c00;
+            font-weight: bold;
+        }
+
+        /* --- Estilos da Tabela de Procedimento --- */
+        .procedure-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .procedure-table th, .procedure-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .procedure-table th {
+            background-color: #f2f2f2;
+        }
+        .procedure-table .step-col { width: 5%; text-align: center; }
+        .procedure-table .action-col { width: 40%; }
+        .procedure-table .obs-col { width: 35%; }
+        .procedure-table .critical-col { width: 20%; text-align: center; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ========= CABEÇALHO ========= -->
+        <table class="header-table">
+            <tr>
+                <td rowspan="2" class="logo-cell" style="width:25%;">
+                    SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.
+                </td>
+                <td colspan="2" class="title-cell">
+                    INSTRUÇÃO DE TRABALHO
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Código:</strong> IT-[ÁREA]-[NÚMERO]-Rev[XX]</td>
+                <td><strong>Título:</strong> [NOME DA INSTRUÇÃO]</td>
+            </tr>
+            <tr>
+                <td><strong>Área:</strong> [ÁREA RESPONSÁVEL]</td>
+                <td colspan="2"><strong>Equipamento/Processo:</strong> [NOME]</td>
+            </tr>
+        </table>
+
+        <!-- ========= CORPO DO DOCUMENTO ========= -->
+        <h1>[TÍTULO DA INSTRUÇÃO DE TRABALHO]</h1>
+
+        <h2>1. OBJETIVO</h2>
+        <p>Descrever o objetivo específico desta instrução.</p>
+
+        <h2>2. MATERIAIS E EQUIPAMENTOS NECESSÁRIOS</h2>
+        <ul>
+            <li>[Material 1]</li>
+            <li>[Material 2]</li>
+            <li>[Equipamento 1]</li>
+            <li>[EPI necessário]</li>
+        </ul>
+
+        <h2>3. PROCEDIMENTO PASSO A PASSO</h2>
+
+        <h3>3.1 Preparação</h3>
+        <table class="procedure-table">
+            <thead>
+                <tr>
+                    <th class="step-col">Passo</th>
+                    <th class="action-col">Ação</th>
+                    <th class="obs-col">Observação</th>
+                    <th class="critical-col">Ponto Crítico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="step-col">1</td>
+                    <td>[Ação detalhada]</td>
+                    <td>[Observação importante]</td>
+                    <td class="critical-col"><span class="critical-point">⚠️ [Se aplicável]</span></td>
+                </tr>
+                <tr>
+                    <td class="step-col">2</td>
+                    <td>[Ação detalhada]</td>
+                    <td>[Observação importante]</td>
+                    <td class="critical-col"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3.2 Execução</h3>
+        <table class="procedure-table">
+            <!-- A estrutura da tabela é a mesma, então não precisa de cabeçalho de novo -->
+            <tbody>
+                <tr>
+                    <td class="step-col">1</td>
+                    <td>[Ação detalhada]</td>
+                    <td>[Observação importante]</td>
+                    <td class="critical-col"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. PONTOS CRÍTICOS DE CONTROLE</h2>
+        <ul>
+            <li><span class="critical-point">⚠️ [Ponto crítico 1]:</span> [Descrição e cuidados]</li>
+            <li><span class="critical-point">⚠️ [Ponto crítico 2]:</span> [Descrição e cuidados]</li>
+        </ul>
+        
+        <h2>5. SEGURANÇA</h2>
+        <ul>
+            <li><strong>EPIs obrigatórios:</strong> [Lista]</li>
+            <li><strong>Riscos identificados:</strong> [Lista]</li>
+        </ul>
+
+    </div> <!-- Fim do container -->
+
+</body>
+</html>

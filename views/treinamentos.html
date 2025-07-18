@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamentos e Desenvolvimento - Biblioteca SalvaBras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CABEÇALHO PADRÃO DO SITE -->
+    <header class="main-header">
+        <div class="logo">SALVABRAS</div>
+        <nav>
+            <a href="index.html">🏠 Início</a>
+            <a href="treinamentos.html">📚 Treinamentos</a>
+            <a href="pdi.html">📈 PDIs</a>
+            <a href="#">👤 Meu Perfil</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- SEÇÃO DE TÍTULO E FILTROS -->
+        <section class="welcome-section">
+            <h2 class="section-title">Treinamentos e Desenvolvimento</h2>
+            <p>Encontre cursos, workshops e materiais para impulsionar sua carreira na SalvaBras.</p>
+            
+            <!-- A barra de filtros que podemos fazer funcionar com JS depois -->
+            <div class="filter-bar">
+                <button class="btn-filter active">Todos</button>
+                <button class="btn-filter">Qualidade</button>
+                <button class="btn-filter">Segurança</button>
+                <button class="btn-filter">Liderança</button>
+                <button class="btn-filter">Comportamental</button>
+                <button class="btn-filter">Técnicos</button>
+            </div>
+        </section>
+
+        <!-- GRADE DE CURSOS DISPONÍVEIS -->
+        <section class="course-grid">
+
+            <!-- CURSO 1: COMUNICAÇÃO EFICAZ (CONECTADO E FUNCIONAL) -->
+            <div class="course-card">
+                <!-- Imagem do curso -->
+                <img src="https://via.placeholder.com/400x200.png?text=Comunicação" alt="Imagem do curso de Comunicação">
+                <div class="course-content">
+                    <!-- Tag de categoria -->
+                    <span class="course-category" style="background-color: var(--accent-pink );">Comportamental</span>
+                    <!-- Título e Descrição -->
+                    <h3>Comunicação Eficaz</h3>
+                    <p>Desenvolva habilidades de comunicação interpessoal e profissional para o ambiente de trabalho.</p>
+                    <!-- Botão que leva para a página do curso que você criou -->
+                    <a href="curso-comunicacao.html" class="btn btn-orange">Começar Curso</a>
+                </div>
+            </div>
+
+            <!-- CURSO 2: EXCEL AVANÇADO (EXEMPLO) -->
+            <div class="course-card">
+                <img src="https://via.placeholder.com/400x200.png?text=Excel" alt="Imagem do curso de Excel">
+                <div class="course-content">
+                    <span class="course-category" style="background-color: var(--secondary-green );">Técnicos</span>
+                    <h3>Excel Avançado para Análise de Dados</h3>
+                    <p>Domine tabelas dinâmicas, Power Query e crie dashboards de indicadores.</p>
+                    <!-- Este link ainda é um placeholder, pois não criamos a página dele -->
+                    <a href="#" class="btn btn-orange">Saber Mais</a>
+                </div>
+            </div>
+
+            <!-- CURSO 3: ISO 9001 (EXEMPLO) -->
+            <div class="course-card">
+                <img src="https://via.placeholder.com/400x200.png?text=ISO+9001" alt="Imagem do curso de ISO 9001">
+                <div class="course-content">
+                    <span class="course-category" style="background-color: var(--accent-blue );">Qualidade</span>
+                    <h3>Auditor Interno da Norma ISO 9001:2015</h3>
+                    <p>Aprenda a planejar e executar auditorias internas do Sistema de Gestão da Qualidade.</p>
+                    <a href="#" class="btn btn-orange">Saber Mais</a>
+                </div>
+            </div>
+
+            <!-- CURSO 4: NR-12 (EXEMPLO) -->
+            <div class="course-card">
+                <img src="https://via.placeholder.com/400x200.png?text=NR-12" alt="Imagem do curso de NR-12">
+                <div class="course-content">
+                    <span class="course-category" style="background-color: var(--primary-orange );">Segurança</span>
+                    <h3>Segurança no Trabalho em Máquinas (NR-12)</h3>
+                    <p>Conheça os requisitos de segurança para operação e manutenção de máquinas e equipamentos.</p>
+                    <a href="#" class="btn btn-orange">Saber Mais</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- RODAPÉ PADRÃO DO SITE -->
+    <footer class="main-footer">
+        <p><strong>SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.</strong></p>
+        <p>Links Úteis: <a href="#">Site Principal</a> | <a href="#">Política de Privacidade</a></p>
+        <p>&copy; 2025 SalvaBras - Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

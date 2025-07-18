@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Auditoria - [NOME DO DOCUMENTO]</title>
+    <style>
+        /* --- Estilos Gerais (Consistentes) --- */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Estilos do Cabeçalho (Reutilizado) --- */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .header-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .header-table .title-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #f2f2f2;
+        }
+
+        /* --- Estilos do Corpo do Documento --- */
+        h1, h2, h3 {
+            color: #004080;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 16px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        /* --- Estilos da Tabela de Checklist --- */
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .checklist-table th, .checklist-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .checklist-table th {
+            background-color: #f2f2f2;
+        }
+        .checklist-table .item-col { width: 5%; }
+        .checklist-table .criteria-col { width: 45%; }
+        .checklist-table .check-col { width: 10%; text-align: center; }
+        .checklist-table .obs-col { width: 30%; }
+        .checkbox {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #999;
+            vertical-align: middle;
+        }
+        .non-conformity {
+            background-color: #fff0f0;
+            border-left: 4px solid #c00;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ========= CABEÇALHO ========= -->
+        <table class="header-table">
+            <tr><td class="title-cell">CHECKLIST DE AUDITORIA DE DOCUMENTOS</td></tr>
+            <tr><td><strong>Documento auditado:</strong> [NOME/CÓDIGO]</td></tr>
+            <tr><td><strong>Auditor:</strong> [NOME] | <strong>Data da auditoria:</strong> [DD/MM/AAAA]</td></tr>
+        </table>
+
+        <!-- ========= CORPO DO DOCUMENTO ========= -->
+        <h1>CHECKLIST DE AUDITORIA DE DOCUMENTOS</h1>
+
+        <h2>1. ESTRUTURA E FORMATO</h2>
+        <table class="checklist-table">
+            <thead>
+                <tr>
+                    <th class="item-col">Item</th>
+                    <th class="criteria-col">Critério</th>
+                    <th class="check-col">Conforme</th>
+                    <th class="check-col">Não Conforme</th>
+                    <th class="obs-col">Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.1</td>
+                    <td>Cabeçalho padronizado</td>
+                    <td class="check-col"><div class="checkbox"></div></td>
+                    <td class="check-col"><div class="checkbox"></div></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1.2</td>
+                    <td>Código de identificação</td>
+                    <td class="check-col"><div class="checkbox"></div></td>
+                    <td class="check-col"><div class="checkbox"></div></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. CONTEÚDO</h2>
+        <table class="checklist-table">
+            <!-- Repetir a estrutura da tabela acima -->
+            <thead>
+                <tr>
+                    <th class="item-col">Item</th>
+                    <th class="criteria-col">Critério</th>
+                    <th class="check-col">Conforme</th>
+                    <th class="check-col">Não Conforme</th>
+                    <th class="obs-col">Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2.1</td>
+                    <td>Objetivo claro e definido</td>
+                    <td class="check-col"><div class="checkbox"></div></td>
+                    <td class="check-col"><div class="checkbox"></div></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. RESULTADOS DA AUDITORIA</h2>
+        <h3>3.1 Resumo</h3>
+        <p>
+            <strong>Total de itens avaliados:</strong> [XX] | 
+            <strong>Itens conformes:</strong> [XX] | 
+            <strong>Itens não conformes:</strong> [XX]
+        </p>
+
+        <h3>3.2 Não Conformidades Identificadas</h3>
+        <div class="non-conformity">
+            <strong>Item [X.X]:</strong> [Descrição da não conformidade]<br>
+            <strong>Evidência:</strong> [Descrição]<br>
+            <strong>Impacto:</strong> [Alto/Médio/Baixo]
+        </div>
+        <div class="non-conformity">
+            <strong>Item [X.X]:</strong> [Descrição da não conformidade]<br>
+            <strong>Evidência:</strong> [Descrição]<br>
+            <strong>Impacto:</strong> [Alto/Médio/Baixo]
+        </div>
+
+        <h2>4. PLANO DE AÇÃO</h2>
+        <table class="checklist-table">
+             <thead>
+                <tr>
+                    <th>Não Conformidade</th>
+                    <th>Ação Corretiva</th>
+                    <th>Responsável</th>
+                    <th>Prazo</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>[Descrição]</td>
+                    <td>[Ação]</td>
+                    <td>[Nome]</td>
+                    <td>[Data]</td>
+                    <td>[Pendente]</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- Fim do container -->
+
+</body>
+</html>

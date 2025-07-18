@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDIs da Equipe - Genteech</title>
+  <link rel="stylesheet" href="style-genteech.css" />
+  <style>
+    /* Estilos para cards simplificados */
+    .pdi-card-simples {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #ddd;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .pdi-card-simples:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .pdi-card-simples.alta { border-left-color: #f44336; }
+    .pdi-card-simples.media { border-left-color: #ff9800; }
+    .pdi-card-simples.baixa { border-left-color: #4caf50; }
+    .pdi-card-simples.critica { border-left-color: #9c27b0; }
+    
+    .pdi-header-simples {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .colaborador-info {
+      flex: 1;
+    }
+    
+    .colaborador-nome {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 0 0 5px 0;
+    }
+    
+    .objetivo-resumo {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+    
+    .status-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+    
+    .status-badge-simples {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .prioridade-badge {
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .prioridade-alta { background: #ffebee; color: #d32f2f; }
+    .prioridade-media { background: #fff3e0; color: #f57c00; }
+    .prioridade-baixa { background: #e8f5e8; color: #2e7d32; }
+    .prioridade-critica { background: #f3e5f5; color: #7b1fa2; }
+    
+    .progress-mini {
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      height: 8px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+    
+    .progress-fill-mini {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 0.3s ease;
+    }
+    
+    .progress-fill-mini.baixo { background: linear-gradient(90deg, #ff6b6b, #ff8e8e); }
+    .progress-fill-mini.medio { background: linear-gradient(90deg, #ffa726, #ffcc02); }
+    .progress-fill-mini.alto { background: linear-gradient(90deg, #66bb6a, #4caf50); }
+    .progress-fill-mini.completo { background: linear-gradient(90deg, #2e7d32, #4caf50); }
+    
+    .pdi-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .prazo-info {
+      font-weight: bold;
+    }
+    
+    .prazo-ok { color: #4caf50; }
+    .prazo-atencao { color: #ff9800; }
+    .prazo-urgente { color: #f44336; }
+    
+    .filtros-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .filtros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      align-items: end;
+    }
+    
+    .filtro-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .filtro-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+    }
+    
+    .btn-filtro {
+      padding: 8px 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-filtro:hover, .btn-filtro.ativo {
+      background: #2196f3;
+      color: white;
+      border-color: #2196f3;
+    }
+    
+    .resumo-equipe {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .resumo-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .resumo-numero {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    
+    .resumo-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo">GENTEECH</div>
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="treinamentos.html">📚 Treinamentos</a>
+      <a href="pdi-gestor.html">📈 PDIs Equipe</a>
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="#">👤 Perfil</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Resumo da Equipe -->
+    <section>
+      <h2 class="section-title">📊 Resumo da Equipe</h2>
+      <div class="resumo-equipe" id="resumo-equipe">
+        <!-- Dados serão carregados aqui -->
+      </div>
+    </section>
+
+    <!-- Filtros -->
+    <section>
+      <div class="filtros-container">
+        <h3>🔍 Filtros</h3>
+        <div class="filtros-grid">
+          <div class="filtro-group">
+            <label class="filtro-label">Status</label>
+            <select id="filtroStatus" class="btn-filtro">
+              <option value="">Todos</option>
+              <option value="em_andamento">Em Andamento</option>
+              <option value="concluido">Concluído</option>
+              <option value="atrasado">Atrasado</option>
+              <option value="vencendo">Vencendo</option>
+            </select>
+          </div>
+          <div class="filtro-group">
+            <label class="filtro-label">Prioridade</label>
+            <select id="filtroPrioridade" class="btn-filtro">
+              <option value="">Todas</option>
+              <option value="critica">Crítica</option>
+              <option value="alta">Alta</option>
+              <option value="media">Média</option>
+              <option value="baixa">Baixa</option>
+            </select>
+          </div>
+          <div class="filtro-group">
+            <label class="filtro-label">Colaborador</label>
+            <input type="text" id="filtroColaborador" placeholder="Nome do colaborador" class="btn-filtro">
+          </div>
+          <div class="filtro-group">
+            <button id="btnLimparFiltros" class="btn btn-orange">Limpar Filtros</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista de PDIs Simplificada -->
+    <section>
+      <h2 class="section-title">PDIs da Equipe</h2>
+      <div id="pdi-list-simples" class="pdi-list">
+        <!-- PDIs serão carregados aqui -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <p><strong>GENTEECH - Gestão Inteligente de Pessoas</strong></p>
+    <p>Links Úteis: <a href="#">Site Principal</a> | <a href="#">Política de Privacidade</a></p>
+    <p>&copy; 2025 Genteech - Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // ===================================================================
+    // SCRIPT DA PÁGINA DE PDI GESTOR - VERSÃO 1.0 - GENTEECH
+    // Funcionalidades: visualização simplificada, filtros, navegação para detalhes
+    // ===================================================================
+
+    // --- Configuração da API ---
+    const API_URL = 'http://localhost:3000/api';
+
+    // --- Elementos da Página ---
+    const pdiListContainer = document.getElementById('pdi-list-simples');
+    const resumoEquipe = document.getElementById('resumo-equipe');
+    const filtroStatus = document.getElementById('filtroStatus');
+    const filtroPrioridade = document.getElementById('filtroPrioridade');
+    const filtroColaborador = document.getElementById('filtroColaborador');
+    const btnLimparFiltros = document.getElementById('btnLimparFiltros');
+
+    // --- Dados globais ---
+    let todosOsPDIs = [];
+    let pdisFiltrados = [];
+
+    // --- Funções Auxiliares ---
+    function getProgressClass(progresso) {
+      if (progresso >= 100) return 'completo';
+      if (progresso >= 70) return 'alto';
+      if (progresso >= 30) return 'medio';
+      return 'baixo';
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('pt-BR');
+    }
+
+    function getStatusText(status) {
+      const statusMap = {
+        'em_andamento': 'Em Andamento',
+        'concluido': 'Concluído',
+        'atrasado': 'Atrasado',
+        'vencendo': 'Vencendo',
+        'pausado': 'Pausado'
+      };
+      return statusMap[status] || status;
+    }
+
+    function getPrioridadeText(prioridade) {
+      const prioridadeMap = {
+        'critica': 'Crítica',
+        'alta': 'Alta',
+        'media': 'Média',
+        'baixa': 'Baixa'
+      };
+      return prioridadeMap[prioridade] || prioridade;
+    }
+
+    function calcularDiasRestantes(prazo) {
+      const hoje = new Date();
+      const dataPrazo = new Date(prazo);
+      const diasRestantes = Math.ceil((dataPrazo - hoje) / (1000 * 60 * 60 * 24));
+      return diasRestantes;
+    }
+
+    function getPrazoClass(diasRestantes) {
+      if (diasRestantes < 0) return 'prazo-urgente';
+      if (diasRestantes <= 30) return 'prazo-atencao';
+      return 'prazo-ok';
+    }
+
+    // --- Função para Carregar Resumo da Equipe ---
+    function carregarResumoEquipe() {
+      const total = todosOsPDIs.length;
+      const concluidos = todosOsPDIs.filter(pdi => pdi.status === 'concluido').length;
+      const emAndamento = todosOsPDIs.filter(pdi => pdi.status === 'em_andamento').length;
+      const atrasados = todosOsPDIs.filter(pdi => pdi.status === 'atrasado').length;
+      const vencendo = todosOsPDIs.filter(pdi => pdi.status === 'vencendo').length;
+      const progressoMedio = total > 0 ? Math.round(todosOsPDIs.reduce((acc, pdi) => acc + pdi.progresso, 0) / total) : 0;
+
+      resumoEquipe.innerHTML = `
+        <div class="resumo-card">
+          <div class="resumo-numero" style="color: #2196f3;">${total}</div>
+          <div class="resumo-label">Total PDIs</div>
+        </div>
+        <div class="resumo-card">
+          <div class="resumo-numero" style="color: #4caf50;">${concluidos}</div>
+          <div class="resumo-label">Concluídos</div>
+        </div>
+        <div class="resumo-card">
+          <div class="resumo-numero" style="color: #2196f3;">${emAndamento}</div>
+          <div class="resumo-label">Em Andamento</div>
+        </div>
+        <div class="resumo-card">
+          <div class="resumo-numero" style="color: #ff9800;">${vencendo}</div>
+          <div class="resumo-label">Vencendo</div>
+        </div>
+        <div class="resumo-card">
+          <div class="resumo-numero" style="color: #f44336;">${atrasados}</div>
+          <div class="resumo-label">Atrasados</div>
+        </div>
+        <div class="resumo-card">
+          <div class="resumo-numero" style="color: #9c27b0;">${progressoMedio}%</div>
+          <div class="resumo-label">Progresso Médio</div>
+        </div>
+      `;
+    }
+
+    // --- Função para Renderizar PDIs Simplificados ---
+    function renderizarPDIs(pdis) {
+      if (pdis.length === 0) {
+        pdiListContainer.innerHTML = '<p>Nenhum PDI encontrado com os filtros aplicados.</p>';
+        return;
+      }
+
+      pdiListContainer.innerHTML = pdis.map(pdi => {
+        const diasRestantes = calcularDiasRestantes(pdi.prazo);
+        const prazoClass = getPrazoClass(diasRestantes);
+        const prazoTexto = diasRestantes < 0 ? `${Math.abs(diasRestantes)} dias atrasado` : 
+                         diasRestantes === 0 ? 'Vence hoje' : 
+                         `${diasRestantes} dias restantes`;
+
+        return `
+          <div class="pdi-card-simples ${pdi.prioridade}" onclick="abrirDetalhePDI('${pdi.id}')">
+            <div class="pdi-header-simples">
+              <div class="colaborador-info">
+                <h3 class="colaborador-nome">${pdi.nomeColaborador}</h3>
+                <p class="objetivo-resumo">${pdi.objetivo}</p>
+              </div>
+              <div class="status-info">
+                <span class="prioridade-badge prioridade-${pdi.prioridade}">${getPrioridadeText(pdi.prioridade)}</span>
+                <span class="status-badge-simples status-${pdi.status}">${getStatusText(pdi.status)}</span>
+              </div>
+            </div>
+            
+            <div class="progress-mini">
+              <div class="progress-fill-mini ${getProgressClass(pdi.progresso)}" 
+                   style="width: ${pdi.progresso}%"></div>
+            </div>
+            
+            <div class="pdi-stats">
+              <div class="stat-item">
+                <span>📚</span>
+                <span>${pdi.cursosConcluidos}/${pdi.totalCursos} cursos</span>
+              </div>
+              <div class="stat-item">
+                <span>📊</span>
+                <span>${pdi.progresso}%</span>
+              </div>
+              <div class="stat-item prazo-info ${prazoClass}">
+                <span>⏰</span>
+                <span>${prazoTexto}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- Função para Aplicar Filtros ---
+    function aplicarFiltros() {
+      const statusFiltro = filtroStatus.value;
+      const prioridadeFiltro = filtroPrioridade.value;
+      const colaboradorFiltro = filtroColaborador.value.toLowerCase();
+
+      pdisFiltrados = todosOsPDIs.filter(pdi => {
+        const matchStatus = !statusFiltro || pdi.status === statusFiltro;
+        const matchPrioridade = !prioridadeFiltro || pdi.prioridade === prioridadeFiltro;
+        const matchColaborador = !colaboradorFiltro || pdi.nomeColaborador.toLowerCase().includes(colaboradorFiltro);
+        
+        return matchStatus && matchPrioridade && matchColaborador;
+      });
+
+      renderizarPDIs(pdisFiltrados);
+    }
+
+    // --- Função para Limpar Filtros ---
+    function limparFiltros() {
+      filtroStatus.value = '';
+      filtroPrioridade.value = '';
+      filtroColaborador.value = '';
+      pdisFiltrados = [...todosOsPDIs];
+      renderizarPDIs(pdisFiltrados);
+    }
+
+    // --- Função para Abrir Detalhe do PDI ---
+    function abrirDetalhePDI(pdiId) {
+      window.location.href = `pdi-detalhe.html?id=${pdiId}`;
+    }
+
+    // --- Função para Carregar PDIs ---
+    async function carregarPDIs() {
+      try {
+        // Simulando dados até implementar o MongoDB
+        const pdisSimulados = [
+          {
+            id: '1',
+            nomeColaborador: 'Ana Silva',
+            objetivo: 'Dominar Excel Avançado',
+            prazo: '2025-12-31',
+            progresso: 60,
+            status: 'em_andamento',
+            prioridade: 'alta',
+            totalCursos: 5,
+            cursosConcluidos: 3,
+            dataUltimaAtualizacao: '2025-07-10'
+          },
+          {
+            id: '2',
+            nomeColaborador: 'Bruno Costa',
+            objetivo: 'Certificação ISO 9001',
+            prazo: '2025-11-30',
+            progresso: 100,
+            status: 'concluido',
+            prioridade: 'media',
+            totalCursos: 3,
+            cursosConcluidos: 3,
+            dataUltimaAtualizacao: '2025-07-01'
+          },
+          {
+            id: '3',
+            nomeColaborador: 'Carla Dias',
+            objetivo: 'Melhorar Comunicação',
+            prazo: '2025-10-15',
+            progresso: 20,
+            status: 'atrasado',
+            prioridade: 'critica',
+            totalCursos: 4,
+            cursosConcluidos: 1,
+            dataUltimaAtualizacao: '2025-06-15'
+          },
+          {
+            id: '4',
+            nomeColaborador: 'Daniel Santos',
+            objetivo: 'Liderança de Equipe',
+            prazo: '2025-08-30',
+            progresso: 10,
+            status: 'vencendo',
+            prioridade: 'alta',
+            totalCursos: 6,
+            cursosConcluidos: 0,
+            dataUltimaAtualizacao: '2025-07-01'
+          }
+        ];
+
+        todosOsPDIs = pdisSimulados;
+        pdisFiltrados = [...todosOsPDIs];
+        
+        carregarResumoEquipe();
+        renderizarPDIs(pdisFiltrados);
+        
+      } catch (error) {
+        console.error('Erro ao carregar PDIs:', error);
+        pdiListContainer.innerHTML = '<p>Erro ao carregar PDIs. Verifique se o servidor está rodando.</p>';
+      }
+    }
+
+    // --- Event Listeners ---
+    filtroStatus.addEventListener('change', aplicarFiltros);
+    filtroPrioridade.addEventListener('change', aplicarFiltros);
+    filtroColaborador.addEventListener('input', aplicarFiltros);
+    btnLimparFiltros.addEventListener('click', limparFiltros);
+
+    // --- Inicialização ---
+    document.addEventListener('DOMContentLoaded', carregarPDIs);
+
+    // Tornar função global para onclick
+    window.abrirDetalhePDI = abrirDetalhePDI;
+  </script>
+</body>
+</html>
+

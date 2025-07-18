@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDI por Colaborador - SalvaBras</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo">SALVABRAS</div>
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="treinamentos.html">📚 Treinamentos</a>
+      <a href="pdi.html">📈 PDIs</a>
+      <a href="#">👤 Meu Perfil</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="welcome-section">
+      <h2 class="section-title">Plano de Desenvolvimento Individual (PDI)</h2>
+      <p>Escolha um colaborador ou digite o nome para gerenciar seus PDIs.</p>
+
+      <div class="pdi-form">
+        <label for="colaborador"><strong>Colaborador:</strong></label>
+        <input type="text" id="colaborador" placeholder="Ex: Ana Souza" required />
+
+        <hr style="margin: 20px 0;">
+
+        <input type="text" id="objetivo" placeholder="Objetivo (ex: melhorar comunicação)" required />
+        <input type="text" id="acao" placeholder="Ação (ex: fazer curso de oratória)" required />
+        <input type="text" id="prazo" placeholder="Prazo (ex: julho/2025)" required />
+        <button type="submit" class="btn btn-orange" id="adicionarPDI">Adicionar PDI</button>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">PDIs por Colaborador</h2>
+      <div id="pdi-list" class="pdi-list"></div>
+    </section>
+
+    <section>
+      <h2 class="section-title">📌 Exemplo Modelo - Ana Souza</h2>
+      <div class="pdi-card">
+        <h3>Melhorar Comunicação Interpessoal</h3>
+        <p><strong>Ação:</strong> Participar de curso de oratória e fazer simulações em reuniões.</p>
+        <p><strong>Prazo:</strong> Setembro/2025</p>
+      </div>
+      <div class="pdi-card">
+        <h3>Domínio do Sistema ERP</h3>
+        <p><strong>Ação:</strong> Realizar o curso completo do Protheus e apresentar melhorias.</p>
+        <p><strong>Prazo:</strong> Outubro/2025</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <p><strong>SALVABRAS INDÚSTRIA E COMÉRCIO LTDA.</strong></p>
+    <p>Links Úteis: <a href="#">Site Principal</a> | <a href="#">Política de Privacidade</a></p>
+    <p>&copy; 2025 SalvaBras - Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // ===================================================================
+    // SCRIPT DA PÁGINA DE PDI - VERSÃO 3.0
+    // Inclui funcionalidades de LER, CRIAR e DELETAR PDIs.
+    // ===================================================================
+
+    // --- Seleção dos Elementos da Página ---
+    const pdiListContainer = document.getElementById('pdi-list');
+    const colaboradorInput = document.getElementById('colaborador');
+    const objetivoInput = document.getElementById('objetivo');
+    const acaoInput = document.getElementById('acao');
+    const prazoInput = document.getElementById('prazo');
+    const addButton = document.getElementById('adicionarPDI');
+
+    // --- Configuração da API ---
+    const API_URL = 'http://localhost:3000/api/pdis';
+
+    // --- Funções da Aplicação ---
+
+    // Função para LER os PDIs do servidor e mostrar na tela
+    async function buscarErenderizarPDIs( ) {
+        try {
+            const response = await fetch(API_URL);
+            const pdis = await response.json();
+
+            pdiListContainer.innerHTML = '';
+
+            pdis.forEach(pdi => {
+                const pdiCard = document.createElement('div');
+                pdiCard.className = 'pdi-card';
+                pdiCard.innerHTML = `
+                    <h3>${pdi.colaborador}</h3>
+                    <p><strong>Objetivo:</strong> ${pdi.objetivo}</p>
+                    <p><strong>Ação:</strong> ${pdi.acao || 'Não definida'}</p>
+                    <p><strong>Prazo:</strong> ${pdi.prazo || 'Não definido'}</p>
+                    <button class="btn btn-blue" onclick="removerPDI(${pdi.id})">Remover</button>
+                `;
+                pdiListContainer.appendChild(pdiCard);
+            });
+
+        } catch (error) {
+            console.error('Erro ao buscar dados da API:', error);
+            pdiListContainer.innerHTML = '<p style="color: red;">Erro ao carregar os dados. Verifique se o servidor está rodando.</p>';
+        }
+    }
+
+    // Função para CRIAR um novo PDI
+    async function adicionarPDI() {
+        const novoPDI = {
+            colaborador: colaboradorInput.value,
+            objetivo: objetivoInput.value,
+            acao: acaoInput.value,
+            prazo: prazoInput.value
+        };
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(novoPDI)
+            });
+
+            if (response.ok) {
+                colaboradorInput.value = '';
+                objetivoInput.value = '';
+                acaoInput.value = '';
+                prazoInput.value = '';
+                buscarErenderizarPDIs();
+            } else {
+                alert('Erro ao adicionar PDI.');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar dados para a API:', error);
+            alert('Erro de comunicação com o servidor.');
+        }
+    }
+
+    // Função para DELETAR um PDI
+    async function removerPDI(pdiId) {
+        if (!confirm('Tem certeza que deseja remover este PDI?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/${pdiId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                buscarErenderizarPDIs();
+            } else {
+                alert('Erro ao remover o PDI.');
+            }
+        } catch (error) {
+            console.error('Erro ao comunicar com a API para remover:', error);
+            alert('Erro de comunicação com o servidor.');
+        }
+    }
+
+    // --- "Ouvintes" de Eventos ---
+
+    // Fica de olho no botão "Adicionar"
+    addButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        adicionarPDI();
+    });
+
+    // --- Execução Inicial ---
+
+    // Busca e mostra os PDIs assim que a página carrega
+    buscarErenderizarPDIs();
+
+  </script>
+
+</body>
+</html>

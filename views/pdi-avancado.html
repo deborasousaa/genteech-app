@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDI Avançado - Genteech</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos específicos para funcionalidades avançadas */
+    .progress-container {
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      padding: 3px;
+      margin: 10px 0;
+      position: relative;
+      height: 20px;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    
+    .progress-bar.baixo { background: linear-gradient(90deg, #ff6b6b, #ff8e8e); }
+    .progress-bar.medio { background: linear-gradient(90deg, #ffa726, #ffcc02); }
+    .progress-bar.alto { background: linear-gradient(90deg, #66bb6a, #4caf50); }
+    .progress-bar.completo { background: linear-gradient(90deg, #2e7d32, #4caf50); }
+    
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .status-em_andamento { background: #e3f2fd; color: #1976d2; }
+    .status-concluido { background: #e8f5e8; color: #2e7d32; }
+    .status-atrasado { background: #ffebee; color: #d32f2f; }
+    .status-vencendo { background: #fff3e0; color: #f57c00; }
+    
+    .pdi-card-avancado {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #ddd;
+    }
+    
+    .pdi-card-avancado.em_andamento { border-left-color: #1976d2; }
+    .pdi-card-avancado.concluido { border-left-color: #2e7d32; }
+    .pdi-card-avancado.atrasado { border-left-color: #d32f2f; }
+    .pdi-card-avancado.vencendo { border-left-color: #f57c00; }
+    
+    .pdi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .pdi-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-update { background: #2196f3; color: white; }
+    .btn-update:hover { background: #1976d2; }
+    
+    .btn-delete { background: #f44336; color: white; }
+    .btn-delete:hover { background: #d32f2f; }
+    
+    .alertas-container {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .alerta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 6px;
+    }
+    
+    .alerta-erro { background: #ffebee; color: #d32f2f; }
+    .alerta-aviso { background: #fff3e0; color: #f57c00; }
+    
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover { color: black; }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo">GENTEECH</div>
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="treinamentos.html">📚 Treinamentos</a>
+      <a href="pdi-avancado.html">📈 PDIs</a>
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="#">👤 Perfil</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Seção de Alertas -->
+    <section id="alertas-section" style="display: none;">
+      <div class="alertas-container">
+        <h3>🚨 Alertas Importantes</h3>
+        <div id="alertas-list"></div>
+      </div>
+    </section>
+
+    <!-- Dashboard de Estatísticas -->
+    <section>
+      <h2 class="section-title">📊 Dashboard de PDIs</h2>
+      <div class="dashboard-stats" id="dashboard-stats">
+        <!-- Estatísticas serão carregadas aqui -->
+      </div>
+    </section>
+
+    <!-- Formulário para Novo PDI -->
+    <section class="welcome-section">
+      <h2 class="section-title">Plano de Desenvolvimento Individual (PDI)</h2>
+      <p>Gerencie os PDIs da sua equipe com indicadores visuais e alertas inteligentes.</p>
+
+      <div class="pdi-form">
+        <label for="colaborador"><strong>Colaborador:</strong></label>
+        <input type="text" id="colaborador" placeholder="Ex: Ana Souza" required />
+
+        <hr style="margin: 20px 0;">
+
+        <input type="text" id="objetivo" placeholder="Objetivo (ex: melhorar comunicação)" required />
+        <input type="text" id="acao" placeholder="Ação (ex: fazer curso de oratória)" required />
+        <input type="date" id="prazo" required />
+        <input type="number" id="progresso" placeholder="Progresso (%)" min="0" max="100" value="0" />
+        <textarea id="observacoes" placeholder="Observações (opcional)" rows="3"></textarea>
+        <button type="submit" class="btn btn-orange" id="adicionarPDI">Adicionar PDI</button>
+      </div>
+    </section>
+
+    <!-- Lista de PDIs -->
+    <section>
+      <h2 class="section-title">PDIs Cadastrados</h2>
+      <div id="pdi-list" class="pdi-list"></div>
+    </section>
+  </main>
+
+  <!-- Modal para Atualizar PDI -->
+  <div id="updateModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Atualizar PDI</h3>
+      <form id="updateForm">
+        <input type="hidden" id="updateId" />
+        <label>Progresso (%):</label>
+        <input type="number" id="updateProgresso" min="0" max="100" required />
+        <label>Observações:</label>
+        <textarea id="updateObservacoes" rows="3"></textarea>
+        <div style="margin-top: 15px;">
+          <button type="submit" class="btn btn-orange">Atualizar</button>
+          <button type="button" class="btn" onclick="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <p><strong>GENTEECH - Gestão Inteligente de Pessoas</strong></p>
+    <p>Links Úteis: <a href="#">Site Principal</a> | <a href="#">Política de Privacidade</a></p>
+    <p>&copy; 2025 Genteech - Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // ===================================================================
+    // SCRIPT DA PÁGINA DE PDI AVANÇADO - VERSÃO 4.0 - GENTEECH
+    // Funcionalidades: indicadores visuais, alertas, dashboard, atualizações
+    // ===================================================================
+
+    // --- Configuração da API ---
+    const API_URL = 'http://localhost:3000/api';
+
+    // --- Seleção dos Elementos da Página ---
+    const pdiListContainer = document.getElementById('pdi-list');
+    const colaboradorInput = document.getElementById('colaborador');
+    const objetivoInput = document.getElementById('objetivo');
+    const acaoInput = document.getElementById('acao');
+    const prazoInput = document.getElementById('prazo');
+    const progressoInput = document.getElementById('progresso');
+    const observacoesInput = document.getElementById('observacoes');
+    const addButton = document.getElementById('adicionarPDI');
+    const alertasSection = document.getElementById('alertas-section');
+    const alertasList = document.getElementById('alertas-list');
+    const dashboardStats = document.getElementById('dashboard-stats');
+
+    // --- Funções Auxiliares ---
+    function getProgressClass(progresso) {
+      if (progresso >= 100) return 'completo';
+      if (progresso >= 70) return 'alto';
+      if (progresso >= 30) return 'medio';
+      return 'baixo';
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('pt-BR');
+    }
+
+    function getStatusText(status) {
+      const statusMap = {
+        'em_andamento': 'Em Andamento',
+        'concluido': 'Concluído',
+        'atrasado': 'Atrasado',
+        'vencendo': 'Vencendo'
+      };
+      return statusMap[status] || status;
+    }
+
+    // --- Função para Carregar Dashboard ---
+    async function carregarDashboard() {
+      try {
+        const response = await fetch(`${API_URL}/dashboard`);
+        const data = await response.json();
+        
+        dashboardStats.innerHTML = `
+          <div class="stat-card">
+            <div class="stat-number" style="color: #2196f3;">${data.total}</div>
+            <div class="stat-label">Total de PDIs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color: #4caf50;">${data.concluidos}</div>
+            <div class="stat-label">Concluídos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color: #ff9800;">${data.vencendo}</div>
+            <div class="stat-label">Vencendo</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color: #f44336;">${data.atrasados}</div>
+            <div class="stat-label">Atrasados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color: #9c27b0;">${data.progressoMedio}%</div>
+            <div class="stat-label">Progresso Médio</div>
+          </div>
+        `;
+
+        // Carregar alertas
+        if (data.alertas && data.alertas.length > 0) {
+          alertasSection.style.display = 'block';
+          alertasList.innerHTML = data.alertas.map(alerta => `
+            <div class="alerta-item alerta-${alerta.tipo}">
+              <span>${alerta.tipo === 'erro' ? '🚨' : '⚠️'}</span>
+              <div>
+                <strong>${alerta.colaborador}</strong>: ${alerta.mensagem}
+                ${alerta.diasAtraso ? `(${alerta.diasAtraso} dias de atraso)` : ''}
+                ${alerta.diasRestantes ? `(${alerta.diasRestantes} dias restantes)` : ''}
+              </div>
+            </div>
+          `).join('');
+        } else {
+          alertasSection.style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Erro ao carregar dashboard:', error);
+      }
+    }
+
+    // --- Função para Carregar PDIs ---
+    async function carregarPDIs() {
+      try {
+        const response = await fetch(`${API_URL}/pdis`);
+        const pdis = await response.json();
+        
+        if (pdis.length === 0) {
+          pdiListContainer.innerHTML = '<p>Nenhum PDI cadastrado ainda.</p>';
+          return;
+        }
+
+        pdiListContainer.innerHTML = pdis.map(pdi => `
+          <div class="pdi-card-avancado ${pdi.status}">
+            <div class="pdi-header">
+              <h3>${pdi.colaborador}</h3>
+              <span class="status-badge status-${pdi.status}">${getStatusText(pdi.status)}</span>
+            </div>
+            
+            <div style="margin: 10px 0;">
+              <strong>Objetivo:</strong> ${pdi.objetivo}
+            </div>
+            
+            <div style="margin: 10px 0;">
+              <strong>Ação:</strong> ${pdi.acao}
+            </div>
+            
+            <div style="margin: 10px 0;">
+              <strong>Prazo:</strong> ${formatDate(pdi.prazo)}
+            </div>
+            
+            <div style="margin: 10px 0;">
+              <strong>Progresso:</strong>
+              <div class="progress-container">
+                <div class="progress-bar ${getProgressClass(pdi.progresso)}" 
+                     style="width: ${pdi.progresso}%">
+                  ${pdi.progresso}%
+                </div>
+              </div>
+            </div>
+            
+            ${pdi.observacoes ? `
+              <div style="margin: 10px 0;">
+                <strong>Observações:</strong> ${pdi.observacoes}
+              </div>
+            ` : ''}
+            
+            <div style="margin: 10px 0; font-size: 12px; color: #666;">
+              Criado em: ${formatDate(pdi.dataCriacao)} | 
+              Última atualização: ${formatDate(pdi.dataUltimaAtualizacao)}
+            </div>
+            
+            <div class="pdi-actions">
+              <button class="btn-small btn-update" onclick="abrirModalUpdate(${pdi.id}, ${pdi.progresso}, '${pdi.observacoes || ''}')">
+                Atualizar
+              </button>
+              <button class="btn-small btn-delete" onclick="deletarPDI(${pdi.id})">
+                Excluir
+              </button>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Erro ao carregar PDIs:', error);
+        pdiListContainer.innerHTML = '<p>Erro ao carregar PDIs. Verifique se o servidor está rodando.</p>';
+      }
+    }
+
+    // --- Função para Adicionar PDI ---
+    async function adicionarPDI() {
+      const dados = {
+        colaborador: colaboradorInput.value.trim(),
+        objetivo: objetivoInput.value.trim(),
+        acao: acaoInput.value.trim(),
+        prazo: prazoInput.value,
+        progresso: parseInt(progressoInput.value) || 0,
+        observacoes: observacoesInput.value.trim()
+      };
+
+      if (!dados.colaborador || !dados.objetivo || !dados.acao || !dados.prazo) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/pdis`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
+
+        if (response.ok) {
+          // Limpar formulário
+          colaboradorInput.value = '';
+          objetivoInput.value = '';
+          acaoInput.value = '';
+          prazoInput.value = '';
+          progressoInput.value = '0';
+          observacoesInput.value = '';
+          
+          // Recarregar listas
+          await carregarPDIs();
+          await carregarDashboard();
+          
+          alert('PDI adicionado com sucesso!');
+        } else {
+          alert('Erro ao adicionar PDI.');
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar PDI:', error);
+        alert('Erro ao conectar com o servidor.');
+      }
+    }
+
+    // --- Função para Deletar PDI ---
+    async function deletarPDI(id) {
+      if (!confirm('Tem certeza que deseja excluir este PDI?')) return;
+
+      try {
+        const response = await fetch(`${API_URL}/pdis/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          await carregarPDIs();
+          await carregarDashboard();
+          alert('PDI excluído com sucesso!');
+        } else {
+          alert('Erro ao excluir PDI.');
+        }
+      } catch (error) {
+        console.error('Erro ao excluir PDI:', error);
+        alert('Erro ao conectar com o servidor.');
+      }
+    }
+
+    // --- Funções do Modal ---
+    function abrirModalUpdate(id, progresso, observacoes) {
+      document.getElementById('updateId').value = id;
+      document.getElementById('updateProgresso').value = progresso;
+      document.getElementById('updateObservacoes').value = observacoes;
+      document.getElementById('updateModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('updateModal').style.display = 'none';
+    }
+
+    // --- Função para Atualizar PDI ---
+    async function atualizarPDI(event) {
+      event.preventDefault();
+      
+      const id = document.getElementById('updateId').value;
+      const progresso = parseInt(document.getElementById('updateProgresso').value);
+      const observacoes = document.getElementById('updateObservacoes').value;
+
+      try {
+        const response = await fetch(`${API_URL}/pdis/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ progresso, observacoes })
+        });
+
+        if (response.ok) {
+          closeModal();
+          await carregarPDIs();
+          await carregarDashboard();
+          alert('PDI atualizado com sucesso!');
+        } else {
+          alert('Erro ao atualizar PDI.');
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar PDI:', error);
+        alert('Erro ao conectar com o servidor.');
+      }
+    }
+
+    // --- Event Listeners ---
+    addButton.addEventListener('click', adicionarPDI);
+    document.getElementById('updateForm').addEventListener('submit', atualizarPDI);
+    
+    // Fechar modal ao clicar no X ou fora dele
+    document.querySelector('.close').addEventListener('click', closeModal);
+    window.addEventListener('click', (event) => {
+      if (event.target === document.getElementById('updateModal')) {
+        closeModal();
+      }
+    });
+
+    // --- Inicialização ---
+    document.addEventListener('DOMContentLoaded', async () => {
+      await carregarDashboard();
+      await carregarPDIs();
+    });
+
+    // Atualizar dados a cada 30 segundos
+    setInterval(async () => {
+      await carregarDashboard();
+    }, 30000);
+  </script>
+</body>
+</html>
+
